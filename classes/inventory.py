@@ -16,7 +16,7 @@ class Inventory:
         self.release_year = release_year
         self.copies_available = copies_available
 
-    def get_vidoe_by_id(self):
+    def get_video_by_id(self):
         pass
 
     @classmethod

@@ -12,7 +12,7 @@ import os
 # customer last name
 # current list of video rentals (by title), each title separated by a forward slash "/"
 class Customer:
-    def __init__(self,id,account_type,first_name,last_name,current_video_rentals):
+    def __init__(self,id,account_type,first_name,last_name,current_video_rentals = []):
         self.id = id
         self.account = account_type
         self.first_name = first_name
@@ -20,15 +20,7 @@ class Customer:
         self.current_video_rentals = []
         self.current_video_rentals.append(current_video_rentals)
         pass
-
-    def show_current_video_rentals(self):
-        return self.current_video_rentals
-
-    def add_video_rental(self, video_to_rent):
-        self.current_video_rentals.append(video_to_rent.title)
-
-    def return_video_rental(self, video_to_return):
-        self.current_video_rentals.remove(video_to_return.title)
+    
     
     @classmethod
     def get_all_customers(cls):
