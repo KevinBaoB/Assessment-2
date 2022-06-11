@@ -6,14 +6,14 @@ from classes.store import Store
 # each title should be listed separately (i.e. not displayed with slashes from the CSV file) X
 # Adding a new customer X
 # you should not have an initial list of video rentals assigned to a newly created customer X
-# can you prevent duplicate ids from existing?
-# Renting a video out to a customer
-# video by title
-# customer by id
-# IMPORTANT: Customers should be limited based on their account type. Your application should enforce these limitations when attempting to rent a video!
-# Returning a video from a customer
-# video by title
-# customer by id
+# can you prevent duplicate ids from existing? X
+# Renting a video out to a customer X
+# video by title X
+# customer by id X
+# IMPORTANT: Customers should be limited based on their account type. Your application should enforce these limitations when attempting to rent a video! X
+# Returning a video from a customer X
+# video by title X
+# customer by id X
 # Exiting the application
 
 
@@ -57,7 +57,7 @@ while True:
 
         while customer_data['account_type'] not in account_types:
             print("Sorry. Please type one of the available account types:\n")
-            
+
             customer_data['account_type'] = input('Choose from the following customer account types:\n1. "sx" = standard account\n2. "px" = premium account\n3. "sf" = standard family account\n4. "pf" = premium family account\n')
 
         customer_data['first_name'] = input('Enter customer first name:\n')
@@ -77,35 +77,35 @@ while True:
 
         print(customer)
 
-# "sx" = standard account: max 1 rental out at a time
-# "px" = premium account: max 3 rentals out at a time
-# "sf" = standard family account: max 1 rental out at a time AND can not rent any "R" rated movies
-# "pf" = premium family account: max 3 rentals out at a time AND can not rent any "R" rated movies
-
-        if customer.account_type == 'sx' and len(customer.current_video_rentals) < 1:
+        if store.account_limits_check(customer_renting):
             video_want_to_rent = input(f"Enter from the available listing above:\n")
-            store.add_video_rental(customer_renting, video_want_to_rent)
+            
+            if store.rating_check(customer_renting, video_want_to_rent):
+                print("Rated R videos are not apart of your account")
+            
+            else:
+                store.add_video_rental(customer_renting, video_want_to_rent)
 
-        elif customer.account_type == 'px' and len(customer.current_video_rentals) < 3:
-            video_want_to_rent = input(f"Enter from the available listing above:\n")
-            store.add_video_rental(customer_renting, video_want_to_rent)
         else:
             print("You've reached your max rentals.")
 
-        
-
-        
     elif mode == '5':
         who_is_turning_in = input("\nEnter customer information to see their rented videos:\n")
 
         customer_info = store.get_customer_by_id(who_is_turning_in)
+        rentals = ", ".join(customer_info.current_video_rentals)
 
-        print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {customer_info.current_video_rentals}\n")
+        print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {rentals}\n")
 
 # Exact naming for movie returns issue still needs solving
 
-        if len(customer_info.current_video_rentals) > 0:
+        if len(rentals) > 0:
             video_to_turnin = input("Please enter name of the video you would like to turn in: \n")
+            
+            while video_to_turnin not in customer_info.current_video_rentals:
+                print('invalid input. Please name a video:\n')
+                video_to_turnin = input("Please enter name of the video you would like to turn in: \n")
+
             store.return_video_rental(who_is_turning_in,video_to_turnin)
         else:
             print("You have nothing to turn in.")

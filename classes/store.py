@@ -26,12 +26,46 @@ class Store:
 
     def add_new_customer(self, customer_data):
         self.customers.append(customer_data)
-    
-    def add_video_rental(self,customer, video_to_rent):
-        self.get_customer_by_id(customer).current_video_rentals.append(video_to_rent)        
-        self.get_movie_by_title(video_to_rent).copies_available = (int(self.get_movie_by_title(video_to_rent).copies_available) - 1)
-        return self.get_customer_by_id(customer).current_video_rentals
 
+    def account_limits_check(self, customer):
+        customer_info = self.get_customer_by_id(customer)
+        rentals = customer_info.current_video_rentals
+        account_type = customer_info.account_type
+        if account_type == 'sx' and len(rentals) < 1:
+            return True
+        elif account_type == 'px' and len(rentals) < 3:
+            return True
+        elif account_type == 'sf' and len(rentals) < 1:
+            return True
+        elif account_type == 'pf' and len(rentals) < 3:
+            return True
+        else:
+            return False
+
+    def rating_check(self, customer, video_to_rent):
+        customer_info = self.get_customer_by_id(customer)
+        account_type = customer_info.account_type
+        movie = self.get_movie_by_title(video_to_rent)
+        
+        if account_type == 'sf' and movie.rating == 'R':
+            return True
+        elif account_type == 'pf' and movie.rating == 'R':
+            return True
+
+    def add_video_rental(self,customer, video_to_rent):
+        movie = self.get_movie_by_title(video_to_rent)
+        current_rentals = self.get_customer_by_id(customer).current_video_rentals
+        if movie.copies_available != "0":
+            self.get_movie_by_title(video_to_rent).copies_available = (int(self.get_movie_by_title(video_to_rent).copies_available) - 1)
+            self.get_customer_by_id(customer).current_video_rentals.append(video_to_rent) 
+        else :
+            print("\nNone in stock\n")
+        
+        if len(current_rentals) == 0:
+            print("You have no rentals")
+        else:
+            print("Here are your current rentals:\n")
+            print(", ".join(current_rentals))
 
     def return_video_rental(self,customer, video_to_return):
         self.get_customer_by_id(customer).current_video_rentals.remove(video_to_return)
