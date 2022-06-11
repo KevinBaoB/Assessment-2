@@ -14,7 +14,7 @@ import os
 class Customer:
     def __init__(self,id,account_type,first_name,last_name,current_video_rentals):
         self.id = id
-        self.account = account_type
+        self.account_type = account_type
         self.first_name = first_name
         self.last_name = last_name
         self.current_video_rentals = current_video_rentals.split("/")

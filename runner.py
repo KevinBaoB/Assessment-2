@@ -38,7 +38,7 @@ while True:
 
         customer_info = store.get_customer_by_id(customer)
 
-        print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {customer_info.current_video_rentals if len(customer_info.current_video_rentals) != 0 else 'nothin at this time'}\n")
+        print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {customer_info.current_video_rentals if len(customer_info.current_video_rentals) != 0 else 'nothing at this time'}\n")
 
     elif mode == '3':
         customer_data = {}
@@ -56,13 +56,21 @@ while True:
     elif mode == '4':
         store.available_rentals()
         customer_renting = input(f"Enter the ID number of who is renting:\n")
-        video_want_to_rent = input(f"Enter from the available listing above:\n")
-        
-        store.add_video_rental(customer_renting, video_want_to_rent)
+        customer = store.get_customer_by_id(customer_renting)
 
+        if customer.account_type == 'sx' and len(customer.current_video_rentals) < 1:
+            video_want_to_rent = input(f"Enter from the available listing above:\n")
+            store.add_video_rental(customer_renting, video_want_to_rent)
+
+        elif 
+        else:
+            print("You've reached your max rentals.")
+
+        
     elif mode == '5':
         who_is_turning_in = input("\nEnter customer information to see their rented videos:\n")
         customer_info = store.get_customer_by_id(who_is_turning_in)
+
 
         print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {customer_info.current_video_rentals}\n")
 
