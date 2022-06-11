@@ -12,7 +12,7 @@ import os
 # customer last name
 # current list of video rentals (by title), each title separated by a forward slash "/"
 class Customer:
-    def __init__(self,id,account_type,first_name,last_name,current_video_rentals):
+    def __init__(self,id,account_type,first_name,last_name,current_video_rentals = ""):
         self.id = id
         self.account_type = account_type
         self.first_name = first_name
@@ -20,6 +20,8 @@ class Customer:
         self.current_video_rentals = current_video_rentals.split("/")
         pass
     
+    def __str__(self):
+        return f"\n{self.first_name} {self.last_name} is renting {self.current_video_rentals if len(self.current_video_rentals) != 0 else 'nothing at this time'}\n"
     
     @classmethod
     def get_all_customers(cls):

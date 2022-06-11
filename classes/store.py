@@ -12,6 +12,13 @@ class Store:
             if customer.id == customer_to_find:
                 return customer
 
+    def get_all_customer_id(self):
+        print("\n")
+        id_list = []
+        for i, customer in enumerate(self.customers):
+            id_list.append(customer.id)
+        return id_list
+
     def get_movie_by_title(self, title):
         for video in self.inventory:
             if video.title == title:
