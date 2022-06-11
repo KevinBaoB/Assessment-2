@@ -28,7 +28,6 @@ class Inventory:
         with open(path, 'r') as inventory_file:
             inventory_reader = csv.DictReader(inventory_file)
             for video in inventory_reader:
-                print(video)
                 videos.append(Inventory(**dict(video)))
         return videos
 

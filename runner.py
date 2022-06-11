@@ -39,7 +39,7 @@ while True:
         print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {customer_info.current_video_rentals}\n")
 
     elif mode == '3':
-        customer_data = {'role': 'customer'}
+        customer_data = {}
         customer_data['id'] = input('Enter customer id: \n')
         customer_data['account_type'] = input('Choose from the following customer account types:\n1. "sx" = standard account\n2. "px" = premium account\n3. "sf" = standard family account\n4. "pf" = premium family account\n')
         customer_data['first_name']      = input('Enter customer first name:\n')
@@ -48,6 +48,12 @@ while True:
     
         store.add_new_customer(Customer(**customer_data))
 
+    elif mode == '4':
+        store.available_rentals()
+        customer_renting = input(f"Enter the ID number of who is renting:\n")
+        video_want_to_rent = input(f"Enter from the available listing above:\n")
+        
+        store.add_video_rental(customer_renting, video_want_to_rent)
 
     elif mode == '5':
         who_is_turning_in = input("\nEnter customer information to see their rented videos:\n")

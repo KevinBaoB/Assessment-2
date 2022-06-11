@@ -12,13 +12,12 @@ import os
 # customer last name
 # current list of video rentals (by title), each title separated by a forward slash "/"
 class Customer:
-    def __init__(self,id,account_type,first_name,last_name,current_video_rentals = []):
+    def __init__(self,id,account_type,first_name,last_name,current_video_rentals):
         self.id = id
         self.account = account_type
         self.first_name = first_name
         self.last_name = last_name
-        self.current_video_rentals = []
-        self.current_video_rentals.append(current_video_rentals)
+        self.current_video_rentals = current_video_rentals.split("/")
         pass
     
     
@@ -27,7 +26,7 @@ class Customer:
         customers = []
         my_path = os.path.abspath(os.path.dirname(__file__))
         path = os.path.join(my_path, "../data/customers.csv")
-        with open(path, 'r') as customer_file:
+        with open(path) as customer_file:
             cust_reader = csv.DictReader(customer_file)
             for customer in cust_reader:
                 customers.append(Customer(**dict(customer)))
