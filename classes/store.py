@@ -27,7 +27,9 @@ class Store:
 
 
     def return_video_rental(self,customer, video_to_return):
-        self.get_customer_by_id(customer).current_video_rentals.append(video_to_return)
+        self.get_customer_by_id(customer).current_video_rentals.remove(video_to_return)
+        self.get_movie_by_title(video_to_return).copies_available = (int(self.get_movie_by_title(video_to_return).copies_available) + 1)
+
 
     def available_rentals(self):
         count = 0

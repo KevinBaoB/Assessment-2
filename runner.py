@@ -35,15 +35,20 @@ while True:
 
     elif mode == '2':
         customer = input("\nEnter customer information to see their rented videos:\n")
+
         customer_info = store.get_customer_by_id(customer)
-        print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {customer_info.current_video_rentals}\n")
+
+        print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {customer_info.current_video_rentals if len(customer_info.current_video_rentals) != 0 else 'nothin at this time'}\n")
 
     elif mode == '3':
         customer_data = {}
         customer_data['id'] = input('Enter customer id: \n')
         customer_data['account_type'] = input('Choose from the following customer account types:\n1. "sx" = standard account\n2. "px" = premium account\n3. "sf" = standard family account\n4. "pf" = premium family account\n')
+
         customer_data['first_name']      = input('Enter customer first name:\n')
+
         customer_data['last_name']       = input('Enter customer last name: \n')
+
         customer_data['current_video_rentals']  = input('Enter any rentals you want now: \n')
     
         store.add_new_customer(Customer(**customer_data))
@@ -58,10 +63,13 @@ while True:
     elif mode == '5':
         who_is_turning_in = input("\nEnter customer information to see their rented videos:\n")
         customer_info = store.get_customer_by_id(who_is_turning_in)
+
         print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {customer_info.current_video_rentals}\n")
 
+# Exact naming for movie returns issue still needs solving
+
         video_to_turnin = input("Please enter name of the video you would like to turn in: \n")
-        store.return_video_rental(video_to_turnin)   
+        store.return_video_rental(who_is_turning_in,video_to_turnin)   
     
     elif mode == '6':
         break
