@@ -64,8 +64,8 @@ class Store:
         if len(current_rentals) == 0:
             print("You have no rentals")
         else:
-            print("Here are your current rentals:\n")
-            print(", ".join(current_rentals))
+            print("Rental Succussful!\n")
+
 
     def return_video_rental(self,customer, video_to_return):
         self.get_customer_by_id(customer).current_video_rentals.remove(video_to_return)

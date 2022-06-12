@@ -17,9 +17,11 @@ class Customer:
         self.account_type = account_type
         self.first_name = first_name
         self.last_name = last_name
-        self.current_video_rentals = current_video_rentals.split("/")
+        self.current_video_rentals = current_video_rentals
         if self.current_video_rentals == ['']:
             self.current_video_rentals = []
+        else:
+            self.current_video_rentals = ("".join(self.current_video_rentals)).split("/")
     
     def __str__(self):
         return f"\n{self.first_name} {self.last_name} is renting {', '.join(self.current_video_rentals) if len(', '.join(self.current_video_rentals)) != 0 else 'nothing at this time'}"

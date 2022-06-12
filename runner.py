@@ -53,7 +53,7 @@ while True:
 
         customer_data['account_type'] = input('Choose from the following customer account types:\n1. "sx" = standard account\n2. "px" = premium account\n3. "sf" = standard family account\n4. "pf" = premium family account\n')
 
-        account_types = ['sx', 'fx', 'sf', 'pf']
+        account_types = ['sx', 'px', 'sf', 'pf']
 
         while customer_data['account_type'] not in account_types:
             print("Sorry. Please type one of the available account types:\n")
