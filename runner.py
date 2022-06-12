@@ -12,7 +12,6 @@ while True:
 
     elif mode == '2':
         customer = input("\nEnter customer information to see their rented videos:\n")
-        customer_data = {}
         
         all_id = store.get_all_customer_id()
 
