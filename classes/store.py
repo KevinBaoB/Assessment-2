@@ -51,6 +51,8 @@ class Store:
             return True
         elif account_type == 'pf' and movie.rating == 'R':
             return True
+        else:
+            return False
 
     def add_video_rental(self,customer, video_to_rent):
         movie = self.get_movie_by_title(video_to_rent)
@@ -76,25 +78,34 @@ class Store:
         customer_info = self.get_customer_by_id(customer)
         if customer_info.current_video_rentals == ['']:
             customer_info.current_video_rentals = []
-            print("Zero rentals in this account.")
+            print("Zero rentals in this account.\n")
 
         elif len(customer_info.current_video_rentals) != 0:
             for i, video in enumerate(customer_info.current_video_rentals):
                 print(f"{i + 1}. {video}")
         
         else:
-            print("Zero rentals in this account.")
+            print("Zero rentals in this account.\n")
 
     def available_rentals(self):
         count = 0
         print("\n")
-        print("The available rentals are:\n")
         for i, video in enumerate(self.inventory):
             if video.copies_available != "0":
                 count += 1
                 print(f"{count}. {video.title} with {video.copies_available} in stock")
             
-
+    def available_video_list(self):
+        count = 0
+        current_list = []
+        print("\n")
+        print("The available rentals are:\n")
+        for i, video in enumerate(self.inventory):
+            if video.copies_available != "0":
+                count += 1
+                current_list.append(video.title)
+        return current_list
+            
 
     def list_inventory(self):
         print("\n")
