@@ -1,30 +1,6 @@
 from classes.customer import Customer
 from classes.store import Store
 
-# Viewing the current video inventory for the store X
-# Viewing a customer's current rented videos X
-# customer by id X
-# each title should be listed separately (i.e. not displayed with slashes from the CSV file) X
-# Adding a new customer X
-# you should not have an initial list of video rentals assigned to a newly created customer X
-# can you prevent duplicate ids from existing? X
-# Renting a video out to a customer X
-# video by title X
-# customer by id X
-# IMPORTANT: Customers should be limited based on their account type. Your application should enforce these limitations when attempting to rent a video! X
-# Returning a video from a customer X
-# video by title X
-# customer by id X
-# Exiting the application
-
-
-# == Welcome to Code Platoon Video! ==
-# 1. View store video inventory
-# 2. View customer rented videos
-# 3. Add new customer
-# 4. Rent video
-# 5. Return video
-# 6. Exit
 
 store = Store('CodeBuster')
 
