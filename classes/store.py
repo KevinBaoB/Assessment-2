@@ -56,8 +56,9 @@ class Store:
         movie = self.get_movie_by_title(video_to_rent)
         current_rentals = self.get_customer_by_id(customer).current_video_rentals
         if movie.copies_available != "0":
-            self.get_movie_by_title(video_to_rent).copies_available = (int(self.get_movie_by_title(video_to_rent).copies_available) - 1)
-            self.get_customer_by_id(customer).current_video_rentals.append(video_to_rent) 
+            movie.copies_available = (int(self.get_movie_by_title(video_to_rent).copies_available) - 1)
+            current_rentals.append(video_to_rent) 
+
         else :
             print("\nNone in stock\n")
         
@@ -71,6 +72,18 @@ class Store:
         self.get_customer_by_id(customer).current_video_rentals.remove(video_to_return)
         self.get_movie_by_title(video_to_return).copies_available = (int(self.get_movie_by_title(video_to_return).copies_available) + 1)
 
+    def customer_current_rentals(self,customer):
+        customer_info = self.get_customer_by_id(customer)
+        if customer_info.current_video_rentals == ['']:
+            customer_info.current_video_rentals = []
+            print("Zero rentals in this account.")
+
+        elif len(customer_info.current_video_rentals) != 0:
+            for i, video in enumerate(customer_info.current_video_rentals):
+                print(f"{i + 1}. {video}")
+        
+        else:
+            print("Zero rentals in this account.")
 
     def available_rentals(self):
         count = 0
@@ -80,6 +93,7 @@ class Store:
             if video.copies_available != "0":
                 count += 1
                 print(f"{count}. {video.title} with {video.copies_available} in stock")
+            
 
 
     def list_inventory(self):

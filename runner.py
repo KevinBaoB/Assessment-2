@@ -1,5 +1,6 @@
 from classes.customer import Customer
 from classes.store import Store
+
 # Viewing the current video inventory for the store X
 # Viewing a customer's current rented videos X
 # customer by id X
@@ -36,9 +37,11 @@ while True:
     elif mode == '2':
         customer = input("\nEnter customer information to see their rented videos:\n")
 
-        customer_info = str(store.get_customer_by_id(customer))
+        customer_info = (store.get_customer_by_id(customer))
 
         print(customer_info)
+
+        store.customer_current_rentals(customer)
 
     elif mode == '3':
         customer_data = {}
@@ -68,6 +71,8 @@ while True:
     
         store.add_new_customer(Customer(**customer_data))
 
+        print("New account creation Successful!")
+
     elif mode == '4':
         store.available_rentals()
 
@@ -76,6 +81,7 @@ while True:
         customer = store.get_customer_by_id(customer_renting)
 
         print(customer)
+        store.customer_current_rentals(customer_renting)
 
         if store.account_limits_check(customer_renting):
             video_want_to_rent = input(f"Enter from the available listing above:\n")
@@ -96,18 +102,22 @@ while True:
         customer_info = store.get_customer_by_id(who_is_turning_in)
         rentals = ", ".join(customer_info.current_video_rentals)
 
-        print(f"\n{customer_info.first_name} {customer_info.last_name} is renting {rentals}\n")
+        print(customer_info)
+        store.customer_current_rentals(who_is_turning_in)
 
 # Exact naming for movie returns issue still needs solving
 
         if len(rentals) > 0:
-            video_to_turnin = input("Please enter name of the video you would like to turn in: \n")
+            video_to_turnin = input("\nPlease enter the number of the video on your current rentals list you would like to turn in: \n")
+
+            video_to_turnin = customer_info.current_video_rentals[int(video_to_turnin) - 1]
             
             while video_to_turnin not in customer_info.current_video_rentals:
                 print('invalid input. Please name a video:\n')
                 video_to_turnin = input("Please enter name of the video you would like to turn in: \n")
 
-            store.return_video_rental(who_is_turning_in,video_to_turnin)
+            store.return_video_rental(who_is_turning_in, video_to_turnin)
+            print("Return Successful!")
         else:
             print("You have nothing to turn in.")
     

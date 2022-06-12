@@ -1,13 +1,6 @@
 import csv
 import os
 
-# Manage the store's video inventory:
-# video id
-# video title
-# video rating
-# video release year
-# number of copies currently available in-store
-
 class Inventory:
     def __init__(self, id,title,rating,release_year,copies_available):
         self.id = id
