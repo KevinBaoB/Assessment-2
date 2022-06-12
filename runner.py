@@ -81,7 +81,8 @@ while True:
             video_want_to_rent = input(f"Enter from the available listing above:\n")
             
             if store.rating_check(customer_renting, video_want_to_rent):
-                print("Rated R videos are not apart of your account")
+                print("RATED R VIDEOS NOT ALLOWED ON YOUR ACCOUNT! ")
+
             
             else:
                 store.add_video_rental(customer_renting, video_want_to_rent)

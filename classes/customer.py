@@ -18,7 +18,7 @@ class Customer:
         self.first_name = first_name
         self.last_name = last_name
         self.current_video_rentals = current_video_rentals
-        if self.current_video_rentals == ['']:
+        if self.current_video_rentals == [''] or self.current_video_rentals == "":
             self.current_video_rentals = []
         else:
             self.current_video_rentals = ("".join(self.current_video_rentals)).split("/")
