@@ -89,11 +89,10 @@ class Store:
 
     def available_rentals(self):
         count = 0
-        print("\n")
         for i, video in enumerate(self.inventory):
             if video.copies_available != "0":
                 count += 1
-                print(f"{count}. {video.title} with {video.copies_available} in stock")
+                print(f"{count}. {video.title} is rated {video.rating} with {video.copies_available} in stock")
             
     def available_video_list(self):
         count = 0

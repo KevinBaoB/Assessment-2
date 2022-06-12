@@ -1,3 +1,4 @@
+from curses.ascii import isdigit
 from classes.customer import Customer
 from classes.store import Store
 
@@ -57,7 +58,6 @@ while True:
 
     elif mode == '4':
         
-
         customer_renting = input(f"Enter the ID number of who is renting:\n")
 
         all_id = store.get_all_customer_id()
@@ -77,8 +77,14 @@ while True:
 
             video_want_to_rent = input(f"Enter from the available listing above:\n")
 
+            while not isdigit(video_want_to_rent):
+                print("INVALID INPUT. PLEASE ENTER NUMBER!\n")
+                store.available_rentals()
+                video_want_to_rent = input(f"\nEnter the NUMBER from the list above:\n")
+
+
             while int(video_want_to_rent) > len(available_rentals):
-                print("\nINVALID INPUT")
+                print("\nINVALID INPUT\n")
                 store.available_rentals()
                 video_want_to_rent = input(f"Enter from the available listing above:\n")
 
@@ -95,7 +101,7 @@ while True:
                 store.available_rentals()
                 video_want_to_rent = input(f"Enter from the available listing above thats NOT R-rated:\n")
                 while int(video_want_to_rent) > len(available_rentals):
-                    print("\nINVALID INPUT")
+                    print("\nINVALID INPUT\n")
                     store.available_rentals()
                     video_want_to_rent = input(f"Enter from the available listing above:\n")
 
@@ -110,10 +116,16 @@ while True:
             print("You've reached your max rentals.")
 
     elif mode == '5':
-        who_is_turning_in = input("\nEnter customer information to see their rented videos:\n")
+        who_is_turning_in = input("\nEnter customer ID to see their rented videos:\n")
+
+        all_id = store.get_all_customer_id()
+
+        while who_is_turning_in not in all_id:
+            print("\nACCOUNT NOT IN SYSTEM!\n")
+            who_is_turning_in = input(f"Enter the ID number of who is turning in:\n")
 
         customer_info = store.get_customer_by_id(who_is_turning_in)
-        rentals = ", ".join(customer_info.current_video_rentals)
+        rentals = customer_info.current_video_rentals
 
         print(customer_info)
         store.customer_current_rentals(who_is_turning_in)
@@ -122,6 +134,14 @@ while True:
 
         if len(rentals) > 0:
             video_to_turnin = input("\nPlease enter the number of the video on your current rentals list you would like to turn in: \n")
+
+            while not isdigit(video_to_turnin):
+                print("INVALID INPUT. PLEASE ENTER NUMBER!\n")
+                video_to_turnin = input("\nPlease enter the number of the video on your current rentals list you would like to turn in: \n")
+
+            while int(video_to_turnin) > len(rentals):
+                print("INVALID INPUT! CHOOSE A NUMBER FROM YOUR LIST!")
+                video_to_turnin = input("\nPlease enter the number of the video on your current rentals list you would like to turn in: \n")
 
             video_to_turnin = customer_info.current_video_rentals[int(video_to_turnin) - 1]
             
