@@ -12,12 +12,15 @@ class Customer:
             self.current_video_rentals = []
         else:
             self.current_video_rentals = ("".join(self.current_video_rentals)).split("/")
+
+
+# When called for the customer class info for an individual customer
     
     def __str__(self):
         return f"\n{self.first_name} {self.last_name} is renting:\n"
         
-        # {', '.join(self.current_video_rentals) if len(', '.join(self.current_video_rentals)) != 0 else 'nothing at this time.'}"
-    
+# Used to get all customers info in the store class
+ 
     @classmethod
     def get_all_customers(cls):
         customers = []

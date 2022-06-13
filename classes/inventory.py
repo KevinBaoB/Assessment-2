@@ -9,6 +9,7 @@ class Inventory:
         self.release_year = release_year
         self.copies_available = copies_available
 
+# Used to get all of the inventory info in the store class
 
     @classmethod
     def get_inventory_list(cls):
