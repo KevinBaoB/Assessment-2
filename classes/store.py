@@ -109,4 +109,4 @@ class Store:
     def list_inventory(self):
         print("\n")
         for i, video in enumerate(self.inventory):
-            print(f"{i + 1}. {video.release_year} {video.title} : {video.copies_available} in stock")
+            print(f"{i + 1}. {video.release_year} {video.title} (rated {video.rating}) : {video.copies_available} in stock")
