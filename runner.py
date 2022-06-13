@@ -70,12 +70,12 @@ while True:
 
         print(customer)
         store.customer_current_rentals(customer_renting)
-        store.available_rentals()
+        
 
         if store.account_limits_check(customer_renting):
             available_rentals = store.available_video_list()
-
-            video_want_to_rent = input(f"Enter from the available listing above:\n")
+            store.available_rentals()
+            video_want_to_rent = input(f"\nEnter from the available listing above:\n")
 
 
 
